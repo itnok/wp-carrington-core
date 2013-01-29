@@ -97,8 +97,10 @@ function cfct_loop() {
  * Includes the appropriate template file for the content
  *  
 **/
-function cfct_content() {
-	$file = cfct_choose_content_template();
+function cfct_content($file = '') {
+	if (empty($file)) {
+		$file = cfct_choose_content_template();
+	}
 	cfct_template_file('content', $file);
 }
 
