@@ -29,7 +29,7 @@ function cfct_option_css() {
 **/
 function cfct_admin_menu() {
 	        add_theme_page(
-		apply_filters('cfct_admin_settings_title', __('Carrington Theme Settings', 'carrington')),
+		apply_filters('cfct_admin_settings_title', __('Roberto Pesce Theme Settings', 'carrington')),
 		apply_filters('cfct_admin_settings_menu', __('Theme Settings', 'carrington')),
 		'edit_theme_options',
 		'carrington-settings',
@@ -75,26 +75,107 @@ function cfct_update_settings() {
 function cfct_register_options() {
 	global $cfct_hidden_fields;
 	$yn_options = array(
-		'yes' => __('Yes', 'carrington'),
-		'no' => __('No', 'carrington')
+		'yes' => __( 'Sì', 'carrington' ),
+		'no'  => __( 'No', 'carrington' )
 	);
+	$cfct_categories[ 0 ] = ''; // Void first array key to disable feature
+	$wpCats = get_categories(
+		array(
+			'hide_empty' => 0,
+			'parent' 	 => 0,
+		)
+	);
+	foreach( $wpCats as $cat ) {
+	    $cfct_categories[ 'catID:' . $cat->cat_ID ] = $cat->cat_name;
+		$wpSubCats = get_categories(
+			array(
+				'hide_empty' => 0,
+				'parent' 	 => $cat->cat_ID,
+			)
+		);
+		foreach( $wpSubCats as $subcat ) {
+		    $cfct_categories[ 'catID:' . $subcat->cat_ID ] = ' »»» ' . $subcat->cat_name;
+			$wpSubCats = get_categories(
+				array(
+					'hide_empty' => 0,
+					'parent' 	 => $cat->cat_ID,
+				)
+			);
+		}
+	}
 	$cfct_options = array(
-		'cfct' => array(
-			'label' => '',
+		'pcom_social' => array(
+			'label' => 'Iscrizioni ai Social Network',
 			//This is a callback, use cfct_options_blank to display nothing
 			'description' => 'cfct_options_blank',
 			'fields' => array(
-				'about' => array(
-					'type' => 'textarea',
-					'label' => __('About text (shown in sidebar)', 'carrington'),
-					'cols' => 60,
-					'rows' => 5,
-					'name' => 'about_text',
+				'facebook' => array(
+					'type' => 'text',
+					'label' => __('Facebook', 'carrington'),
+					'name' => 'facebook',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire il [nome della pagina] Facebook: https://www.facebook.com/[nome della pagina])', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
 				),
+				'facebook_app_id' => array(
+					'type' => 'text',
+					'label' => __('Facebook App ID', 'carrington'),
+					'name' => 'facebook_app_id',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire l\'[ID dell\'App] di intefaccia a Facebook OpenGraph)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'facebook_usr_id' => array(
+					'type' => 'text',
+					'label' => __('Facebook User ID', 'carrington'),
+					'name' => 'facebook_usr_id',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire lo [User ID] dell\'utente Facebook amministratore oppure l\'ID della Fanpage)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'googleplus' => array(
+					'type' => 'text',
+					'label' => __('Google+', 'carrington'),
+					'name' => 'googleplus',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire lo [ID profilo] Google+: https://plus.google.com/[ID profilo]/posts)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'twitter' => array(
+					'type' => 'text',
+					'label' => __('Twitter', 'carrington'),
+					'name' => 'twitter',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire lo [username] Twitter: @[usarname])', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'linkedin' => array(
+					'type' => 'text',
+					'label' => __('Gruppo LinkedIn', 'carrington'),
+					'name' => 'linkedin',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire lo [ID gruppo] LinkedIn: http://www.linkedin.com/groups?gid=[ID gruppo])', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'youtube' => array(
+					'type' => 'text',
+					'label' => __('Canale YouTube', 'carrington'),
+					'name' => 'youtube',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire lo [username] YouTube: http://www.youtube.com/user/[username])', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+//				'icontact_id' => array(
+//					'type' => 'text',
+//					'label' => __('Iscrizione iContact', 'carrington'),
+//					'name' => 'icontact_id',
+//					'help' => '<br /><span class="cfct-help">'.__('(inserire lo [userid] iContact)', 'carrington').'</span>',
+//					'class' => 'cfct-text-long',
+//				),
+			),
+		),
+		'cfct' => array(
+			'label' => 'Impostazioni Generali del Tema',
+			//This is a callback, use cfct_options_blank to display nothing
+			'description' => 'cfct_options_blank',
+			'fields' => array(
 				'header' => array(
 					'type' => 'textarea',
 					'label' => __('Header code (analytics, etc.)', 'carrington'),
-					'name' => 'wp_head',
+					'name' => 'wp_header',
 				),
 				'footer' => array(
 					'type' => 'textarea',
@@ -105,20 +186,15 @@ function cfct_register_options() {
 					'type' => 'text',
 					'label' => __('Copyright / legal footer text', 'carrington'),
 					'name' => 'copyright',
-					'help' => '<br /><span class="cfct-help">'.__('(add %Y to output the current year)', 'carrington').'</span>',
+					'help' => '<br /><span class="cfct-help">'.__('(aggiungi %Y per mostrare l\'anno corrente)', 'carrington').'</span>',
 					'class' => 'cfct-text-long',
 				),
-				'login' => array(
+				'maintenance' => array(
 					'type' => 'radio',
-					'label' => __('Show log in/out links in footer', 'carrington'),
-					'name' => 'login_link_enabled',
+					'label' => __('Impostare la modalità manutenzione?', 'carrington'),
+					'name' => 'maintenance',
 					'options' => $yn_options,
-				),
-				'credit' => array(
-					'type' => 'radio',
-					'label' => __('Give credit in footer', 'carrington'),
-					'name' => 'credit',
-					'options' => $yn_options,
+					'help' => '<br /><span class="cfct-help">'.__('(rende il sito web inaccessibile ai visitatori e mostra loro una pagina che invita a ritornare più tardi...)<br /><b>[AMMINISTRATORI e AUTORI possono regolarmente accedere e vedere l\'intero sito web!]</b>', 'carrington').'</span>',
 				),
 				/**
 				'radio' => array(
