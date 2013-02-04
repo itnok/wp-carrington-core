@@ -34,8 +34,10 @@ function cfct_page($file = '') {
  * Includes the appropriate template file for a header
  *  
 **/
-function cfct_header() {
-	$file = cfct_choose_general_template('header');
+function cfct_header($file = '') {
+	if (empty($file)) {
+		$file = cfct_choose_general_template('header');
+	}
 	cfct_template_file('header', $file);
 }
 
@@ -61,8 +63,10 @@ function cfct_sidebar() {
  * Includes the appropriate template file for a header
  *  
 **/
-function cfct_posts() {
-	$file = cfct_choose_general_template('posts');
+function cfct_posts($file = '') {
+	if (empty($file)) {
+		$file = cfct_choose_general_template('posts');
+	}
 	cfct_template_file('posts', $file);
 }
 
