@@ -167,6 +167,34 @@ function cfct_register_options() {
 //				),
 			),
 		),
+		'pcom_smartmenu' => array(
+			'label' => 'SmartMenu links',
+			//This is a callback, use cfct_options_blank to display nothing
+			'description' => 'cfct_options_blank',
+			'fields' => array(
+				'master_url' => array(
+					'type' => 'text',
+					'label' => __('Master URL', 'carrington'),
+					'name' => 'master_url',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire URL che conduce alla pagina del MASTER)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'corsi_url' => array(
+					'type' => 'text',
+					'label' => __('Corsi URL', 'carrington'),
+					'name' => 'corsi_url',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire URL che conduce alla pagina dei CORSI)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+				'gratis_url' => array(
+					'type' => 'text',
+					'label' => __('Risorse Gratuite URL', 'carrington'),
+					'name' => 'gratis_url',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire URL che conduce alla pagina delle RISORSE GRATUITE)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+			),
+		),
 		'cfct' => array(
 			'label' => 'Impostazioni Generali del Tema',
 			//This is a callback, use cfct_options_blank to display nothing
