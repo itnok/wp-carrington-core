@@ -167,6 +167,20 @@ function cfct_register_options() {
 //				),
 			),
 		),
+		'pcom_themeconfig' => array(
+			'label' => 'Configurazione Theme',
+			//This is a callback, use cfct_options_blank to display nothing
+			'description' => 'cfct_options_blank',
+			'fields' => array(
+				'max_post_in_home' => array(
+					'type' => 'text',
+					'label' => __('Numero MAX di post in homepage', 'carrington'),
+					'name' => 'max_post_in_home',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire il numero massimo di articoli che si vuole siano visualizzati in homepage)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
+			),
+		),
 		'pcom_smartmenu' => array(
 			'label' => 'SmartMenu links',
 			//This is a callback, use cfct_options_blank to display nothing
