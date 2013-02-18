@@ -186,6 +186,13 @@ function cfct_register_options() {
 					'help' => '<br /><span class="cfct-help">'.__('(inserire il numero massimo di articoli che si vuole siano visualizzati in homepage)', 'carrington').'</span>',
 					'class' => 'cfct-text-long',
 				),
+				'privacy_url' => array(
+					'type' => 'text',
+					'label' => __('Privacy URL', 'carrington'),
+					'name' => 'privacy_url',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire URL che conduce alla pagina della Privacy Policy del sito)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
 			),
 		),
 		'pcom_smartmenu' => array(
