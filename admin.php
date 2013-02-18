@@ -172,6 +172,13 @@ function cfct_register_options() {
 			//This is a callback, use cfct_options_blank to display nothing
 			'description' => 'cfct_options_blank',
 			'fields' => array(
+				'excerpt_length' => array(
+					'type' => 'text',
+					'label' => __('Numero massimo di parole per il primo post in homepage', 'carrington'),
+					'name' => 'excerpt_length',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire il numero massimo di parole che si vuole siano visualizzate per il PRIMO ARTICOLO in evidenza in HOMEPAGE)', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
 				'max_post_in_home' => array(
 					'type' => 'text',
 					'label' => __('Numero MAX di post in homepage', 'carrington'),
