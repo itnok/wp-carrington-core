@@ -193,6 +193,13 @@ function cfct_register_options() {
 					'help' => '<br /><span class="cfct-help">'.__('(inserire URL che conduce alla pagina della Privacy Policy del sito)', 'carrington').'</span>',
 					'class' => 'cfct-text-long',
 				),
+				'max_testimonial' => array(
+					'type' => 'text',
+					'label' => __('Numero MAX di testimonianze da mostrare', 'carrington'),
+					'name' => 'max_testimonial',
+					'help' => '<br /><span class="cfct-help">'.__('(inserire il numero massimo di testimonianze da mostrare nell\'apposita sezione [Default: 20])', 'carrington').'</span>',
+					'class' => 'cfct-text-long',
+				),
 			),
 		),
 		'pcom_smartmenu' => array(
