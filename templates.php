@@ -92,8 +92,10 @@ function cfct_attachment() {
  * Includes the appropriate template file for the loop
  *  
 **/
-function cfct_loop() {
-	$file = cfct_choose_general_template('loop');
+function cfct_loop($file = '') {
+	if (empty($file)) {
+		$file = cfct_choose_general_template('loop');
+	}
 	cfct_template_file('loop', $file);
 }
 
